@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plate Mate - Gestión Inteligente de Restaurantes</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Plataforma todo-en-uno para gestionar menús, pedidos, horarios y promociones de tu restaurante. Comienza gratis.">
+    <meta name="keywords" content="restaurante, menú digital, gestión de restaurantes, pedidos online, software restaurante">
+    <meta name="author" content="Plate Mate">
+    
+    <!-- Open Graph / Redes sociales -->
+    <meta property="og:title" content="Plate Mate - Gestión Inteligente de Restaurantes">
+    <meta property="og:description" content="Automatiza tus menús, optimiza pedidos y mejora la experiencia de tus clientes.">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    <meta property="og:url" content="https://platemate.com">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+    
+    <style>
+        /* Estilos adicionales mejorados - PALETA VERDE ELEGANTE */
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #6ee7b7;
+            --primary-soft: #d1fae5;
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --dark: #0f172a;
+            --gray-600: #475569;
+            --gray-400: #94a3b8;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gradient-primary: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --shadow-lg: 0 25px 50px -12px rgba(16, 185, 129, 0.25);
+            --shadow-xl: 0 35px 60px -15px rgba(16, 185, 129, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar mejorada */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px var(--primary);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero section mejorada */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 80%;
+            height: 200%;
+            background: var(--gradient-primary);
+            opacity: 0.03;
+            border-radius: 50%;
+            transform: rotate(20deg);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+            box-shadow: 0 40px 70px -20px var(--primary);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Badge de confianza */
+        .trust-badge {
+            display: inline-block;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        /* Feature cards mejorados */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Steps mejorados */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Pricing cards mejorados */
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 2px solid var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.3);
+            z-index: 2;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        /* Footer mejorado */
+        .footer {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .footer-section a {
+            color: var(--gray-400);
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .steps,
+            .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .steps,
+            .pricing-cards,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Animaciones de entrada */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estadísticas en tiempo real (demo) */
+        .stats-demo {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-light:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 35px -10px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-utensils" style="color: var(--primary);"></i>
+                <span>Plate<span class="highlight" style="color: var(--primary);">Mate</span></span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="#features">Características</a>
+                <a href="#how-it-works">Cómo Funciona</a>
+                <a href="#pricing">Precios</a>
+                <a href="#contact">Contacto</a>
+                <a href="login.html" class="btn btn-outline">Iniciar Sesión</a>
+                <a href="login.html?register=true" class="btn btn-primary">Registrarse</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <span class="trust-badge">
+                    <i class="fas fa-check-circle" style="margin-right: 5px;"></i>
+                    +500 restaurantes confían en nosotros
+                </span>
+                <h1>Revoluciona la Gestión de Tu Restaurante</h1>
+                <p class="subtitle" style="font-size: 1.2rem; color: var(--gray-600); max-width: 600px;">
+                    Plate Mate automatiza tus menús, optimiza pedidos y mejora la experiencia de tus clientes con una plataforma todo-en-uno.
+                </p>
+                
+                <!-- Mini stats demo -->
+                <div class="stats-demo" style="max-width: 500px;">
+                    <div class="stat-item">
+                        <div class="stat-value">+500</div>
+                        <div class="stat-label">Restaurantes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">50k+</div>
+                        <div class="stat-label">Pedidos/mes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">98%</div>
+                        <div class="stat-label">Satisfacción</div>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons" style="margin-top: 30px;">
+                    <a href="#demo" class="btn btn-primary btn-large">
+                        <i class="fas fa-play-circle"></i> Ver Demo
+                    </a>
+                    <a href="login.html?register=true" class="btn btn-secondary btn-large" style="background: white; color: var(--primary); border: 2px solid var(--primary);">
+                        <i class="fas fa-rocket"></i> Comenzar Gratis
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image fade-in" style="animation-delay: 0.2s;">
+                <!-- Usando una imagen de Unsplash como fallback y luego intentando cargar la local -->
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                     alt="Dashboard Plate Mate" 
+                     onerror="this.onerror=null; this.src='assets/images/dashboard-preview.png';"
+                     style="border-radius: 20px; box-shadow: var(--shadow-xl);">
+                
+                <!-- Overlay con estadísticas flotantes (opcional) -->
+                <div style="position: absolute; bottom: 30px; left: 30px; background: white; padding: 20px; border-radius: 10px; box-shadow: var(--shadow-lg); border-left: 4px solid var(--primary);">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-chart-line" style="color: var(--primary); font-size: 1.5rem;"></i>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.2rem;">+245%</div>
+                            <div style="font-size: 0.9rem; color: var(--gray-600);">crecimiento en ventas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <div class="container">
+            <h2 class="section-title">Todo lo que Necesitas en una Sola Plataforma</h2>
+            <p class="section-subtitle">Diseñado específicamente para restaurantes pequeños y medianos</p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Menús Dinámicos</h3>
+                    <p>Actualiza precios, disponibilidad y promociones en tiempo real desde cualquier dispositivo.</p>
+                </div>
+                
+                <div class="feature-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Control de Horarios</h3>
+                    <p>Programa automáticamente la disponibilidad de platillos según días y horarios específicos.</p>
+                </div>
+                
+                <div class="feature-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Información Nutricional</h3>
+                    <p>Muestra automáticamente calorías, alérgenos e ingredientes para cada platillo.</p>
+                </div>
+                
+                <div class="feature-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Personalización Avanzada</h3>
+                    <p>Permite a los clientes personalizar sus pedidos con opciones y extras configurables.</p>
+                </div>
+                
+                <div class="feature-card fade-in" style="animation-delay: 0.4s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Multiplataforma</h3>
+                    <p>Accede desde computadoras, tablets o smartphones con interfaz responsiva.</p>
+                </div>
+                
+                <div class="feature-card fade-in" style="animation-delay: 0.5s;">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Reportes en Tiempo Real</h3>
+                    <p>Analiza ventas, platillos populares y rendimiento con dashboard interactivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section how-it-works" style="background: var(--gray-100);">
+        <div class="container">
+            <h2 class="section-title">Cómo Funciona Plate Mate</h2>
+            
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Registra Tu Restaurante</h3>
+                    <p>Crea tu cuenta y configura tu restaurante en minutos.</p>
+                </div>
+                
+                <div class="step fade-in" style="animation-delay: 0.1s;">
+                    <div class="step-number">2</div>
+                    <h3>Configura Tu Menú</h3>
+                    <p>Sube tus platillos, precios, categorías e información nutricional.</p>
+                </div>
+                
+                <div class="step fade-in" style="animation-delay: 0.2s;">
+                    <div class="step-number">3</div>
+                    <h3>Personaliza Experiencia</h3>
+                    <p>Define horarios, promociones y opciones de personalización.</p>
+                </div>
+                
+                <div class="step fade-in" style="animation-delay: 0.3s;">
+                    <div class="step-number">4</div>
+                    <h3>¡Comienza a Operar!</h3>
+                    <p>Tu menú digital está listo. Monitorea todo desde el dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section pricing">
+        <div class="container">
+            <h2 class="section-title">Planes que se Ajustan a Tu Negocio</h2>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3>Básico</h3>
+                        <div class="price">$29<span>/mes</span></div>
+                        <p>Perfecto para empezar</p>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Hasta 50 platillos</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> 1 menú activo</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Gestión básica de horarios</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Soporte por email</li>
+                        <li><i class="fas fa-times" style="color: #ef4444;"></i> Información nutricional</li>
+                        <li><i class="fas fa-times" style="color: #ef4444;"></i> Personalización avanzada</li>
+                    </ul>
+                    <a href="login.html?register=true&plan=basic" class="btn btn-outline btn-block" style="margin-top: 20px;">Elegir Plan</a>
+                </div>
+                
+                <div class="pricing-card featured fade-in" style="animation-delay: 0.1s;">
+                    <div class="pricing-badge">Más Popular</div>
+                    <div class="pricing-header">
+                        <h3>Profesional</h3>
+                        <div class="price">$59<span>/mes</span></div>
+                        <p>Recomendado para restaurantes</p>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Hasta 200 platillos</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> 3 menús simultáneos</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Horarios avanzados</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Información nutricional</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Personalización de pedidos</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Soporte prioritario</li>
+                    </ul>
+                    <a href="login.html?register=true&plan=pro" class="btn btn-primary btn-block" style="margin-top: 20px;">Elegir Plan</a>
+                </div>
+                
+                <div class="pricing-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="pricing-header">
+                        <h3>Empresarial</h3>
+                        <div class="price">$99<span>/mes</span></div>
+                        <p>Para cadenas de restaurantes</p>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Platillos ilimitados</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Menús ilimitados</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Múltiples sucursales</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> API personalizada</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Reportes avanzados</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Soporte 24/7</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline btn-block" style="margin-top: 20px;">Elegir Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">¿Listo para transformar tu restaurante?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">Únete a cientos de restaurantes que ya confían en nosotros</p>
+            <a href="login.html?register=true" class="btn-light">
+                <i class="fas fa-rocket"></i> Comenzar Ahora
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="index.html" class="logo" style="color: white; font-size: 1.8rem; margin-bottom: 20px; display: inline-block;">
+                        <i class="fas fa-utensils" style="color: var(--primary);"></i>
+                        <span>Plate<span style="color: var(--primary);">Mate</span></span>
+                    </a>
+                    <p style="color: var(--gray-400); margin: 20px 0;">Revolucionando la gestión de restaurantes con tecnología inteligente.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Producto</h4>
+                    <a href="#features">Características</a>
+                    <a href="#pricing">Precios</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#">Actualizaciones</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Compañía</h4>
+                    <a href="#about">Nosotros</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#careers">Carreras</a>
+                    <a href="#contact">Contacto</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">GDPR</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-envelope" style="width: 20px; color: var(--primary);"></i> info@platemate.com</p>
+                    <p><i class="fas fa-phone" style="width: 20px; color: var(--primary);"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt" style="width: 20px; color: var(--primary);"></i> Ciudad de México, MX</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Plate Mate. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Animaciones al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 1s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plate Mate - Iniciar Sesión</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%2310b981'>🍽️</text></svg>">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos - mismos que tenías antes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #6ee7b7;
+            --primary-soft: #d1fae5;
+            --secondary: #f59e0b;
+            --dark: #0f172a;
+            --gray-600: #475569;
+            --gray-400: #94a3b8;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --radius: 24px;
+            --radius-sm: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #0f172a;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #064e3b, #065f46);
+            background-size: 400% 400%;
+            animation: gradient 20s ease infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 18s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, 20px) scale(1.05); }
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .auth-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.3);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-header .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .auth-header .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .auth-header .logo i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 2.5rem;
+        }
+
+        .auth-header .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .auth-header p {
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+
+        .main-tabs {
+            display: flex;
+            margin-bottom: 24px;
+            background: var(--gray-100);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .main-tab {
+            flex: 1;
+            text-align: center;
+            padding: 14px 20px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .main-tab i {
+            font-size: 1.2rem;
+        }
+
+        .main-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 32px;
+            background: var(--gray-100);
+            border-radius: 50px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 50px;
+        }
+
+        .auth-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .auth-section {
+            display: none;
+        }
+
+        .auth-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            color: var(--gray-400);
+            font-size: 1.1rem;
+            z-index: 1;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 48px 14px 48px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-control.error {
+            border-color: #ef4444;
+            background-color: #fef2f2;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--gray-400);
+            cursor: pointer;
+            z-index: 2;
+            padding: 8px;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .forgot-password {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 4px 0;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px var(--primary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .auth-footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+            padding-left: 12px;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, var(--primary-soft), #ffffff);
+            color: var(--primary-dark);
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 24px;
+            display: none;
+            border-left: 4px solid var(--primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .success-message i {
+            margin-right: 8px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-label span {
+            position: relative;
+            padding-left: 30px;
+            line-height: 1.5;
+        }
+
+        .checkbox-label span:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + span:before {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-color: var(--primary);
+        }
+
+        .checkbox-label span:after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + span:after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .checkbox-label a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 44px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 1001;
+            display: none;
+            max-width: 90%;
+            width: 420px;
+            transition: transform 0.2s ease;
+        }
+
+        .modal.show {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-400);
+            line-height: 1;
+            transition: all 0.2s ease;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background-color: #fee2e2;
+            color: #ef4444;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: var(--gray-100);
+            border-radius: 0 0 24px 24px;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+
+            .auth-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .main-tabs, .auth-tabs {
+                flex-direction: column;
+                border-radius: var(--radius-sm);
+                gap: 4px;
+            }
+
+            .main-tab, .auth-tab {
+                border-radius: var(--radius-sm);
+                padding: 10px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+            }
+
+            .modal-footer {
+                flex-direction: column-reverse;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
+            }
+        }
+
+        .btn.loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-utensils"></i>
+                    <span>Plate<span class="highlight">Mate</span></span>
+                </a>
+                <h1>Bienvenido</h1>
+                <p>Gestiona tu restaurante o controla tus calorías</p>
+            </div>
+            
+            <!-- Main Tabs (Restaurante / Cliente) -->
+            <div class="main-tabs">
+                <button class="main-tab active" data-main="restaurante">
+                    <i class="fas fa-store"></i> Restaurante
+                </button>
+                <button class="main-tab" data-main="cliente">
+                    <i class="fas fa-user"></i> Cliente
+                </button>
+            </div>
+            
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <span></span>
+            </div>
+            
+            <!-- SECCIÓN RESTAURANTE -->
+            <div id="restauranteSection" class="auth-section active">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login-restaurante">Iniciar Sesión</button>
+                    <button class="auth-tab" data-tab="register-restaurante">Registrarse</button>
+                </div>
+                
+                <!-- Login Restaurante -->
+                <form id="loginRestauranteForm" class="auth-form active">
+                    <div class="form-group">
+                        <label for="loginRestauranteEmail">Correo Electrónico</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="loginRestauranteEmail" class="form-control" required placeholder="tu@restaurante.com">
+                        </div>
+                        <span class="error-message" id="loginRestauranteEmailError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginRestaurantePassword">Contraseña</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="loginRestaurantePassword" class="form-control" required placeholder="••••••••">
+                            <button type="button" class="password-toggle" id="toggleLoginRestaurantePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="loginRestaurantePasswordError"></span>
+                        <button type="button" class="forgot-password" onclick="showForgotPasswordModal('restaurante')">
+                            <i class="fas fa-key" style="margin-right: 5px;"></i> ¿Olvidaste tu contraseña?
+                        </button>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    
+                    <div class="auth-footer">
+                        ¿No tienes restaurante? <a href="#" class="switch-to-register-restaurante">Regístrate aquí</a>
+                    </div>
+                </form>
+                
+                <!-- Register Restaurante -->
+                <form id="registerRestauranteForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerRestauranteRestaurant">Nombre del Restaurante</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-store input-icon"></i>
+                            <input type="text" id="registerRestauranteRestaurant" class="form-control" required placeholder="Mi Restaurante">
+                        </div>
+                        <span class="error-message" id="registerRestauranteRestaurantError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRestauranteEmail">Correo Electrónico</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="registerRestauranteEmail" class="form-control" required placeholder="contacto@restaurante.com">
+                        </div>
+                        <span class="error-message" id="registerRestauranteEmailError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRestauranteName">Tu Nombre</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="registerRestauranteName" class="form-control" required placeholder="Juan Pérez">
+                        </div>
+                        <span class="error-message" id="registerRestauranteNameError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRestaurantePhone">Teléfono</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" id="registerRestaurantePhone" class="form-control" required placeholder="+52 55 1234 5678">
+                        </div>
+                        <span class="error-message" id="registerRestaurantePhoneError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRestaurantePassword">Contraseña</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="registerRestaurantePassword" class="form-control" required placeholder="••••••••">
+                            <button type="button" class="password-toggle" id="toggleRegisterRestaurantePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="registerRestaurantePasswordError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRestauranteConfirmPassword">Confirmar Contraseña</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="registerRestauranteConfirmPassword" class="form-control" required placeholder="••••••••">
+                            <button type="button" class="password-toggle" id="toggleRegisterRestauranteConfirmPassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="registerRestauranteConfirmPasswordError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRestaurantePlan">Plan</label>
+                        <select id="registerRestaurantePlan" class="form-control">
+                            <option value="basic">Básico - $29/mes</option>
+                            <option value="pro" selected>Profesional - $59/mes</option>
+                            <option value="enterprise">Empresarial - $99/mes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="acceptTermsRestaurante" required>
+                            <span>Acepto los <a href="#">Términos de Servicio</a> y la <a href="#">Política de Privacidad</a></span>
+                        </label>
+                        <span class="error-message" id="acceptTermsRestauranteError"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Crear Cuenta
+                    </button>
+                    
+                    <div class="auth-footer">
+                        ¿Ya tienes cuenta? <a href="#" class="switch-to-login-restaurante">Inicia sesión aquí</a>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- SECCIÓN CLIENTE -->
+            <div id="clienteSection" class="auth-section">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login-cliente">Iniciar Sesión</button>
+                    <button class="auth-tab" data-tab="register-cliente">Registrarse</button>
+                </div>
+                
+                <!-- Login Cliente -->
+                <form id="loginClienteForm" class="auth-form active">
+                    <div class="form-group">
+                        <label for="loginClienteEmail">Correo Electrónico</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="loginClienteEmail" class="form-control" required placeholder="tu@email.com">
+                        </div>
+                        <span class="error-message" id="loginClienteEmailError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginClientePassword">Contraseña</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="loginClientePassword" class="form-control" required placeholder="••••••••">
+                            <button type="button" class="password-toggle" id="toggleLoginClientePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="loginClientePasswordError"></span>
+                        <button type="button" class="forgot-password" onclick="showForgotPasswordModal('cliente')">
+                            <i class="fas fa-key" style="margin-right: 5px;"></i> ¿Olvidaste tu contraseña?
+                        </button>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    
+                    <div class="auth-footer">
+                        ¿No tienes cuenta? <a href="#" class="switch-to-register-cliente">Regístrate aquí</a>
+                    </div>
+                </form>
+                
+                <!-- Register Cliente -->
+                <form id="registerClienteForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerClienteName">Nombre Completo</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="registerClienteName" class="form-control" required placeholder="Juan Pérez">
+                        </div>
+                        <span class="error-message" id="registerClienteNameError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerClienteEmail">Correo Electrónico</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="registerClienteEmail" class="form-control" required placeholder="tu@email.com">
+                        </div>
+                        <span class="error-message" id="registerClienteEmailError"></span>
+                    </div>
+                    
+                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label for="registerClienteEdad">Edad (opcional)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar input-icon"></i>
+                                <input type="number" id="registerClienteEdad" class="form-control" placeholder="28">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerClientePeso">Peso (kg, opcional)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-weight-scale input-icon"></i>
+                                <input type="number" step="0.1" id="registerClientePeso" class="form-control" placeholder="70.5">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label for="registerClienteAltura">Altura (cm, opcional)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-ruler input-icon"></i>
+                                <input type="number" id="registerClienteAltura" class="form-control" placeholder="175">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerClienteObjetivo">Objetivo Calorías</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-fire input-icon"></i>
+                                <input type="number" id="registerClienteObjetivo" class="form-control" value="2000">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerClientePassword">Contraseña</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="registerClientePassword" class="form-control" required placeholder="••••••••">
+                            <button type="button" class="password-toggle" id="toggleRegisterClientePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="registerClientePasswordError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerClienteConfirmPassword">Confirmar Contraseña</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="registerClienteConfirmPassword" class="form-control" required placeholder="••••••••">
+                            <button type="button" class="password-toggle" id="toggleRegisterClienteConfirmPassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="registerClienteConfirmPasswordError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="acceptTermsCliente" required>
+                            <span>Acepto los <a href="#">Términos de Servicio</a> y la <a href="#">Política de Privacidad</a></span>
+                        </label>
+                        <span class="error-message" id="acceptTermsClienteError"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Crear Cuenta
+                    </button>
+                    
+                    <div class="auth-footer">
+                        ¿Ya tienes cuenta? <a href="#" class="switch-to-login-cliente">Inicia sesión aquí</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para recuperar contraseña -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-header">
+            <h3>Recuperar Contraseña</h3>
+            <button class="modal-close" onclick="closeForgotPasswordModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="resetEmail">Correo Electrónico</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="resetEmail" class="form-control" required placeholder="tu@email.com">
+                </div>
+                <input type="hidden" id="resetUserType" value="restaurante">
+            </div>
+            <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 12px;">
+                <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 5px;"></i>
+                Te enviaremos un enlace para restablecer tu contraseña.
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="closeForgotPasswordModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="requestReset()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Modal para cambiar contraseña -->
+    <div id="resetPasswordModal" class="modal">
+        <div class="modal-header">
+            <h3>Cambiar Contraseña</h3>
+            <button class="modal-close" onclick="closeResetPasswordModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="resetEmailConfirm">Correo Electrónico</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" id="resetEmailConfirm" class="form-control" required placeholder="tu@email.com">
+                </div>
+                <input type="hidden" id="resetUserTypeConfirm" value="restaurante">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Nueva Contraseña</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="newPassword" class="form-control" required placeholder="••••••••">
+                    <button type="button" class="password-toggle" id="toggleNewPassword">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmNewPassword">Confirmar Contraseña</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="confirmNewPassword" class="form-control" required placeholder="••••••••">
+                    <button type="button" class="password-toggle" id="toggleConfirmNewPassword">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="closeResetPasswordModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="resetPassword()">Cambiar</button>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay" onclick="closeAllModals()"></div>
+
+    <script>
+        // ========== VARIABLES GLOBALES ==========
+        let currentUserType = 'restaurante';
+
+        // ========== FUNCIÓN PARA CONFIGURAR OJITOS ==========
+        function setupToggle(buttonId, inputId) {
+            const btn = document.getElementById(buttonId);
+            const input = document.getElementById(inputId);
+            
+            if (!btn || !input) return;
+            
+            btn.onclick = function(e) {
+                e.preventDefault();
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    if (icon) icon.className = 'far fa-eye-slash';
+                } else {
+                    input.type = 'password';
+                    if (icon) icon.className = 'far fa-eye';
+                }
+            };
+        }
+
+        // ========== CONFIGURAR TODOS LOS OJITOS ==========
+        function setupAllToggles() {
+            // Restaurante
+            setupToggle('toggleLoginRestaurantePassword', 'loginRestaurantePassword');
+            setupToggle('toggleRegisterRestaurantePassword', 'registerRestaurantePassword');
+            setupToggle('toggleRegisterRestauranteConfirmPassword', 'registerRestauranteConfirmPassword');
+            
+            // Cliente
+            setupToggle('toggleLoginClientePassword', 'loginClientePassword');
+            setupToggle('toggleRegisterClientePassword', 'registerClientePassword');
+            setupToggle('toggleRegisterClienteConfirmPassword', 'registerClienteConfirmPassword');
+            
+            // Modales
+            setupToggle('toggleNewPassword', 'newPassword');
+            setupToggle('toggleConfirmNewPassword', 'confirmNewPassword');
+        }
+
+        // ========== EJECUTAR CUANDO CARGA LA PÁGINA ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAllToggles();
+            
+            // Configurar tabs principales
+            document.querySelectorAll('.main-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentUserType = this.getAttribute('data-main');
+                    
+                    // Mostrar sección correspondiente
+                    document.querySelectorAll('.auth-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(currentUserType + 'Section').classList.add('active');
+                    
+                    // Actualizar tipo de usuario en modales
+                    document.getElementById('resetUserType').value = currentUserType;
+                    document.getElementById('resetUserTypeConfirm').value = currentUserType;
+                });
+            });
+            
+            // Configurar tabs de autenticación para Restaurante
+            setupAuthTabs('restaurante');
+            
+            // Configurar tabs de autenticación para Cliente
+            setupAuthTabs('cliente');
+            
+            // Configurar switches entre login y register
+            setupSwitches();
+        });
+
+        // ========== CONFIGURAR TABS DE AUTENTICACIÓN ==========
+        function setupAuthTabs(section) {
+            const container = document.getElementById(section + 'Section');
+            if (!container) return;
+            
+            const tabs = container.querySelectorAll('.auth-tab');
+            const forms = {
+                login: container.querySelector('#login' + capitalize(section) + 'Form'),
+                register: container.querySelector('#register' + capitalize(section) + 'Form')
+            };
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const tabId = this.getAttribute('data-tab').split('-')[0];
+                    
+                    if (forms.login) forms.login.classList.remove('active');
+                    if (forms.register) forms.register.classList.remove('active');
+                    
+                    if (tabId === 'login' && forms.login) {
+                        forms.login.classList.add('active');
+                    } else if (forms.register) {
+                        forms.register.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // ========== CONFIGURAR SWITCHES ==========
+        function setupSwitches() {
+            // Restaurante: Register -> Login
+            document.querySelectorAll('.switch-to-login-restaurante').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const tab = document.querySelector('#restauranteSection .auth-tab[data-tab="login-restaurante"]');
+                    if (tab) tab.click();
+                });
+            });
+            
+            // Restaurante: Login -> Register
+            document.querySelectorAll('.switch-to-register-restaurante').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const tab = document.querySelector('#restauranteSection .auth-tab[data-tab="register-restaurante"]');
+                    if (tab) tab.click();
+                });
+            });
+            
+            // Cliente: Register -> Login
+            document.querySelectorAll('.switch-to-login-cliente').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const tab = document.querySelector('#clienteSection .auth-tab[data-tab="login-cliente"]');
+                    if (tab) tab.click();
+                });
+            });
+            
+            // Cliente: Login -> Register
+            document.querySelectorAll('.switch-to-register-cliente').forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const tab = document.querySelector('#clienteSection .auth-tab[data-tab="register-cliente"]');
+                    if (tab) tab.click();
+                });
+            });
+        }
+
+        // ========== UTILIDADES ==========
+        function capitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // ========== FUNCIONES DE MODALES ==========
+        function showForgotPasswordModal(userType) {
+            document.getElementById('resetUserType').value = userType || currentUserType;
+            document.getElementById('forgotPasswordModal').classList.add('show');
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        function showResetPasswordModal() {
+            document.getElementById('resetPasswordModal').classList.add('show');
+            document.getElementById('modalOverlay').classList.add('show');
+            setTimeout(setupAllToggles, 150);
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').classList.remove('show');
+            if (!document.getElementById('resetPasswordModal').classList.contains('show')) {
+                document.getElementById('modalOverlay').classList.remove('show');
+            }
+        }
+
+        function closeResetPasswordModal() {
+            document.getElementById('resetPasswordModal').classList.remove('show');
+            if (!document.getElementById('forgotPasswordModal').classList.contains('show')) {
+                document.getElementById('modalOverlay').classList.remove('show');
+            }
+        }
+
+        function closeAllModals() {
+            document.getElementById('forgotPasswordModal').classList.remove('show');
+            document.getElementById('resetPasswordModal').classList.remove('show');
+            document.getElementById('modalOverlay').classList.remove('show');
+        }
+
+        // ========== FUNCIONES DE API ==========
+        async function requestReset() {
+            const email = document.getElementById('resetEmail').value;
+            const userType = document.getElementById('resetUserType').value;
+            
+            if (!email) {
+                alert('Ingresa tu email');
+                return;
+            }
+
+            try {
+                const response = await fetch('api/forgot-password.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'request_reset',
+                        email,
+                        user_type: userType
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    closeForgotPasswordModal();
+                    showResetPasswordModal();
+                    document.getElementById('resetEmailConfirm').value = email;
+                    document.getElementById('resetUserTypeConfirm').value = userType;
+                } else {
+                    alert(data.error || 'Error');
+                }
+            } catch (error) {
+                alert('Error de conexión');
+            }
+        }
+
+        async function resetPassword() {
+            const email = document.getElementById('resetEmailConfirm').value;
+            const userType = document.getElementById('resetUserTypeConfirm').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmNewPassword').value;
+
+            if (!email || !newPass || !confirmPass) {
+                alert('Todos los campos son requeridos');
+                return;
+            }
+            if (newPass.length < 6) {
+                alert('Mínimo 6 caracteres');
+                return;
+            }
+            if (newPass !== confirmPass) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            try {
+                const response = await fetch('api/forgot-password.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'reset_password',
+                        email,
+                        user_type: userType,
+                        new_password: newPass
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ Contraseña cambiada exitosamente');
+                    closeAllModals();
+                } else {
+                    alert('❌ ' + (data.error || 'Error'));
+                }
+            } catch (error) {
+                alert('❌ Error de conexión');
+            }
+        }
+
+        // ========== LOGIN RESTAURANTE CORREGIDO ==========
+        document.getElementById('loginRestauranteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginRestauranteEmail').value;
+            const password = document.getElementById('loginRestaurantePassword').value;
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando...';
+            btn.disabled = true;
+            
+            try {
+                console.log('Intentando login con:', email, password);
+                
+                const response = await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        action: 'login',
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('Respuesta del servidor:', data);
+                
+                if (data.success) {
+                    // Guardar en localStorage
+                    localStorage.setItem('restauranteToken', data.token);
+                    localStorage.setItem('restauranteUser', JSON.stringify(data.user));
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    alert('✅ Login exitoso! Redirigiendo...');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('❌ ' + (data.error || 'Error al iniciar sesión'));
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error en login:', error);
+                alert('❌ Error de conexión: ' + error.message);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // ========== LOGIN CLIENTE CORREGIDO ==========
+        document.getElementById('loginClienteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginClienteEmail').value;
+            const password = document.getElementById('loginClientePassword').value;
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando...';
+            btn.disabled = true;
+            
+            try {
+                console.log('Intentando login cliente con:', email, password);
+                
+                const response = await fetch('api/clientes_auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        action: 'login',
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('Respuesta del servidor:', data);
+                
+                if (data.success) {
+                    localStorage.setItem('clienteToken', data.token);
+                    localStorage.setItem('clienteUser', JSON.stringify(data.user));
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    alert('✅ Login exitoso! Redirigiendo...');
+                    window.location.href = 'cliente.html';
+                } else {
+                    alert('❌ ' + (data.error || 'Error al iniciar sesión'));
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error en login:', error);
+                alert('❌ Error de conexión: ' + error.message);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // ========== REGISTER CLIENTE ==========
+        document.getElementById('registerClienteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('registerClientePassword').value;
+            const confirmPass = document.getElementById('registerClienteConfirmPassword').value;
+            
+            if (password !== confirmPass) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            if (!document.getElementById('acceptTermsCliente').checked) {
+                alert('Debes aceptar los términos y condiciones');
+                return;
+            }
+            
+            const userData = {
+                action: 'register',
+                name: document.getElementById('registerClienteName').value,
+                email: document.getElementById('registerClienteEmail').value,
+                password: password,
+                edad: document.getElementById('registerClienteEdad').value || null,
+                peso: document.getElementById('registerClientePeso').value || null,
+                altura: document.getElementById('registerClienteAltura').value || null,
+                objetivo_calorias: document.getElementById('registerClienteObjetivo').value || 2000
+            };
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registrando...';
+            btn.disabled = true;
+            
+            try {
+                const response = await fetch('api/clientes_auth.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(userData)
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ Registro exitoso. Por favor inicia sesión.');
+                    
+                    // Cambiar a la pestaña de login de cliente
+                    document.querySelector('.main-tab[data-main="cliente"]').click();
+                    const loginTab = document.querySelector('#clienteSection .auth-tab[data-tab="login-cliente"]');
+                    if (loginTab) loginTab.click();
+                    
+                    // Limpiar formulario
+                    this.reset();
+                } else {
+                    alert('❌ ' + (data.error || 'Error al registrarse'));
+                }
+            } catch (error) {
+                alert('❌ Error de conexión');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // ========== REGISTER RESTAURANTE ==========
+        document.getElementById('registerRestauranteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('registerRestaurantePassword').value;
+            const confirmPass = document.getElementById('registerRestauranteConfirmPassword').value;
+            
+            if (password !== confirmPass) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            if (!document.getElementById('acceptTermsRestaurante').checked) {
+                alert('Debes aceptar los términos y condiciones');
+                return;
+            }
+            
+            const userData = {
+                action: 'register',
+                restaurant_name: document.getElementById('registerRestauranteRestaurant').value,
+                email: document.getElementById('registerRestauranteEmail').value,
+                name: document.getElementById('registerRestauranteName').value,
+                phone: document.getElementById('registerRestaurantePhone').value,
+                password: password,
+                plan: document.getElementById('registerRestaurantePlan').value
+            };
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registrando...';
+            btn.disabled = true;
+            
+            try {
+                const response = await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(userData)
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ Registro exitoso. Por favor inicia sesión.');
+                    
+                    // Cambiar a la pestaña de login de restaurante
+                    document.querySelector('.main-tab[data-main="restaurante"]').click();
+                    const loginTab = document.querySelector('#restauranteSection .auth-tab[data-tab="login-restaurante"]');
+                    if (loginTab) loginTab.click();
+                    
+                    // Limpiar formulario
+                    this.reset();
+                } else {
+                    alert('❌ ' + (data.error || 'Error al registrarse'));
+                }
+            } catch (error) {
+                alert('❌ Error de conexión');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // ========== EXPORTAR FUNCIONES ==========
+        window.showForgotPasswordModal = showForgotPasswordModal;
+        window.showResetPasswordModal = showResetPasswordModal;
+        window.closeForgotPasswordModal = closeForgotPasswordModal;
+        window.closeResetPasswordModal = closeResetPasswordModal;
+        window.closeAllModals = closeAllModals;
+        window.requestReset = requestReset;
+        window.resetPassword = resetPassword;
+    </script>
+</body>
+</html>
