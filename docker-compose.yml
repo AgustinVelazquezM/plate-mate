@@ -1,10 +1,8 @@
 version: '3.8'
 
 services:
-  # Servicio web (PHP + Apache)
   web:
     build: .
-    container_name: plate_mate_web
     ports:
       - "8080:80"
     volumes:
@@ -12,37 +10,33 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_USER=root
-      - DB_PASS=root
-      - DB_NAME=plate_mate_db
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: root
+      DB_NAME: plate_mate_db
     networks:
       - plate_mate_network
 
-  # Servicio de base de datos
   db:
     image: mariadb:10.6
-    container_name: plate_mate_db
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=plate_mate_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: plate_mate_db
     volumes:
       - db_data:/var/lib/mysql
       - ./database:/docker-entrypoint-initdb.d
     networks:
       - plate_mate_network
 
-  # phpMyAdmin para administrar la BD
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: plate_mate_phpmyadmin
     ports:
       - "8081:80"
     environment:
-      - PMA_HOST=db
-      - PMA_PORT=3306
+      PMA_HOST: db
+      PMA_PORT: 3306
     depends_on:
       - db
     networks:
